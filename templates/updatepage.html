@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Random  Title </title>
+</head>
+<style>
+
+    * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+        font-family: 'Times New Roman', Times, serif;
+    }
+
+    .image-background {
+        width: 100%;
+        height: 100vh;
+        background: black no-repeat center center fixed;
+        background-size: cover; 
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0 0;
+    }
+
+    .body-create-article{
+        width: 100%;
+        max-width: 780px;
+        height: 100vh;
+        background-color: white;
+        padding: 20px 20px;
+    }
+
+    .box-autor {
+        height: 50px;
+        /* padding: 10px 30px; */
+        display: flex;
+        align-items: center;
+        padding: 0 8px;
+    }
+
+    .box-image__autor {
+        width: 50px;
+        height: 100%;
+        background-image: url('{{ .image }}');
+        background-size: cover; 
+    }
+
+    .box-info__autor {
+        height: 100px;  
+        display: flex;
+        flex-direction: column;
+        padding: 30px 10px;
+    }
+
+    .box-info h1 {
+        font-size: 0.7rem;
+    }
+
+    .title {
+        text-align: left;
+        width: 100%;
+        padding: 7px 8px;
+        font-size: 1.6rem;
+        color: rgb(0,0,0);
+        margin: 8px 0;
+        border: none;
+        outline: none;
+        font-weight: 500;
+        text-transform: capitalize;
+    }
+
+    .desc {
+        font-size: 1rem;
+        border: none;
+        outline: none;
+        padding: 7px 8px;
+        width: 100%;
+    }
+
+    .content {
+        text-align: left;
+        width: 100%;
+        padding: 7px 8px;
+        font-size: 0.9rem;
+        border: none;
+        outline: none;
+    }
+
+    button{
+        background-color: rgb(66, 13, 9);
+        color: white;
+        cursor: pointer;
+        font-size: 0.6rem;
+        border: none;
+        padding: 5px 25px;
+        border-radius: 3px;
+        margin-left: 8px;
+    }
+
+    .register {
+        font-size: 0.55rem;
+        text-decoration: none;
+        text-align: center;
+        margin-top: 5px;
+    }
+
+</style>
+<body>
+    <div class="image-background">
+        <div class="body-create-article">
+
+                <div class="box-autor">
+                    <div class="box-image__autor"></div>
+                    <div class="box-info__autor">
+                        <h5>{{ .post.Title }}</h5>
+                        <h6>{{ .jobautor }}</h6>
+                    </div>
+                </div>
+
+                <form action="/u/{{.post.UserID}}/update/post/{{.post.ID}}" method="POST">
+                    <input name="title" id="title" class="title" type="text" placeholder="{{.post.Title}}">
+                    <input name="description" id="description" class="desc" type="text" placeholder="{{.post.Description}}">
+        
+                    <textarea name="content" id="content" class="content" rows="4" cols="50" placeholder="{{.post.Content}}"></textarea>
+
+                    <input type="hidden" name="user_id" value="{{ .post.UserID }}">
+                    <input type="hidden" name="tag_id" value="{{ .post.TagID }}"> 
+                    <input type="hidden" name="id" value="{{ .post.ID }}">
+
+                    <button>提交</button>    
+                </form>
+
+        </div>
+    </div>
+</body>
+</html>

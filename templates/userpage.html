@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ .user.FirstName }}</title>
+</head>
+<style>
+
+    * {
+        padding: 0;
+        margin: 0;
+        font-family: 'Times New Roman', Times, serif;
+        box-sizing: border-box;
+    }
+
+    .image-background {
+        width: 100%;
+        height: 20vh;
+        background-image: url({{.user.BackgroundPic}});
+        background-size:contain; 
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .profile-pic {
+        width: 125px;
+        height: 125px;
+        background-color: black;
+        border-radius: 50%;
+        margin-top: 5%;
+        background-image: url({{.user.ProfilePic}});
+        background-position: center;
+        background-size: cover;
+        border: 1px solid white;
+    }
+
+    .profile-content {
+        width: 100%;
+        background-color: #171917;
+        display: flex;
+        flex-wrap: wrap;
+        padding: 50px 0px;
+    }
+
+    .box-info {
+        width: 1060px;
+        max-width: 95%;
+        margin: 0 auto;
+        color: beige;
+    }
+
+    .hr {
+        margin: 8px 0;
+        font-size: 0.38rem;
+        letter-spacing: 8px;
+    }
+
+    .username {
+        font-size: 1.7rem;
+        text-transform: capitalize;
+    }
+
+    .job {
+        font-size: 1rem;
+        text-transform: capitalize;
+        padding-top: 4px;
+        letter-spacing: 1px;
+    }
+
+    .posts--by__user {
+        width: 1060px;
+        max-width: 95%;
+        margin: 50px auto;
+        display: grid;
+        grid-template-columns: 250px 250px 250px 250px;
+    }
+
+    .post--box {
+        height: 300px;
+        background-color: white;
+        margin: 0 10px 10px 0;
+        border-radius: 10px;
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        justify-content: space-between;
+        padding: 20px 10px;
+        opacity: 0.8;
+    }
+    
+    .wrapper-box {
+        margin: 0 auto;
+    }
+
+    .wrapp--crud {
+        font-size: 0.55rem;
+        text-align: center;
+    }
+
+    .wrapp--crud a {
+        text-decoration: none;
+    }
+
+    .delete {
+        color: red;
+        border: none;
+        background: none;
+        cursor: pointer;
+        font-size: 0.65rem;
+    }
+
+</style>
+<body>
+    <div class="image-background">
+        <div class="profile-pic"></div>
+    </div>
+    <section class="profile-content">
+        <div class="box-info">
+            <div class="no-wrap">
+                <h1 class="username"> {{ .user.FirstName }} </h1>
+                <p class="job"> {{ .user.Job }} </p>
+                <p class="hr"> 人工水平線 </p>
+            </div>
+        </div>
+
+        <div class="posts--by__user">
+            {{ if .isuserpage }}
+                {{ range .posts }}
+                    <div class="post--box">
+                        <div class="wrapp--title">
+                            <p>{{ .Title }}</p>
+                            <p class="hr"> 人工水平線 </p>
+                        </div>
+                        <div class="wrapper-box">
+                            {{ .Description }}
+                        </div>
+                        <div class="wrapp--crud">
+
+                            <a class="see-full" href="/post/{{.ID}}">看帖子 ----- </a>
+                            <a class="update" href="/u/{{.UserID}}/update/post/{{.ID}}">更新 ----- </a>
+
+                            <form action="/u/{{.UserID}}/delete/post/{{.ID}}" method="get">
+                                <input type="submit" class="delete" value="刪除">
+                            </form>
+                                                        
+                        </div>
+                    </div>
+                {{ end }}
+            {{ else }}
+                {{ range .posts }}
+                <div class="post--box">
+                    <div class="wrapp--title">
+                        <p>{{ .Title }}</p>
+                        <p class="hr"> 人工水平線 </p>
+                    </div>
+                    <div class="wrapper-box">
+                        {{ .Description }}
+                    </div>
+                    <div class="wrapp--crud">
+                        <a class="see-full" href="/post/{{.ID}}">看帖子 </a>                                     
+                    </div>
+                </div>
+                {{ end }}
+            {{end}}
+
+        </div>
+    </section>
+</body>
+</html>

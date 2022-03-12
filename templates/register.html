@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ .title }}</title>
+</head>
+<style>
+
+    * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+    }
+
+    .image-background {
+        width: 100%;
+        height: 100vh;
+        background: url('https://images4.alphacoders.com/101/1013845.jpg') no-repeat center center fixed;
+        background-size: cover; 
+        display: flex;
+        align-items: center;
+        justify-content: end;
+        padding: 0 120px;
+    }
+
+    .box-info {
+        width: 216px;
+        background-color: white;
+        border-radius: 6px;
+        background-color: rgb(238,238,238);
+        padding: 18px 15px;
+    }
+
+    .box-info h1 {
+        font-size: 0.7rem;
+    }
+
+    hr {
+        margin: 5px 0 20px 0;
+    }
+
+    input {
+        width: 100%;
+        padding: 7px 8px;
+        font-size: 0.55rem;
+        color: rgba(0,0,0,0.7);
+        border: 1px solid rgba(138,138,138,0.6);
+        margin-bottom: 13px;
+        border-radius: 5px;
+        outline: none;
+    }
+
+    button {
+        padding: 5px 3px;
+        background-color: rgb(66, 13, 9);
+        color: white;
+        margin: 12px 0; 
+        cursor: pointer;
+        border: none;
+        width: 100%;
+        font-size: 0.55rem;
+        border-radius: 5px;
+    }
+
+    .register {
+        font-size: 0.55rem;
+        text-decoration: none;
+        text-align: center;
+        margin-top: 5px;
+    }
+
+</style>
+<body>
+    <div class="image-background">
+        <div class="box-info">              
+            <h1>你好世界</h1>
+
+            <hr>
+
+            <form action="/register" method="post">
+                <input name="first_name" type="text" placeholder="名"> 
+                <input name="last_name" type="text" placeholder="姓"> 
+                <input name="email" type="text" placeholder="電子郵件"> 
+                <input name="password" type="password" placeholder="密碼"> 
+                <input name="confirm_password" type="password" placeholder="確認密碼"> 
+
+                <button>登記</button>    
+                <a class="register" href="/">有账号吗？登录</a>    
+            </form>
+
+        </div>
+    </div>
+</body>
+</html>
