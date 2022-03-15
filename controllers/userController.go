@@ -116,18 +116,14 @@ func UserPublishGet(ctx *gin.Context) {
 	}
 
 	ctx.HTML(http.StatusOK, "user.html", gin.H{
-		"title":     "Dynamic Title",
-		"image":     "https://pbs.twimg.com/profile_images/1497164191798603803/yoLtCnFO_400x400.jpg",
-		"nomeautor": username,
-		"jobautor":  "Student to Infinity",
-		"userpage":  userPage,
-		"user":user,
+		"userpage": userPage,
+		"user":     user,
 	})
 }
 
 func UserPublishPost(ctx *gin.Context) {
 	username := ctx.Param("username")
-	var user models.User	
+	var user models.User
 	var post models.Post
 
 	session := sessions.Default(ctx)
@@ -148,7 +144,7 @@ func UserPublishPost(ctx *gin.Context) {
 
 		ctx.ShouldBind(&post)
 		database.DB.Create(&post)
-		ctx.Redirect(302, "/u/" + username)
+		ctx.Redirect(302, "/u/"+username)
 	}
 
 }

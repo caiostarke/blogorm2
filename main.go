@@ -13,6 +13,7 @@ func main() {
 	database.Connect()
 	database.AutoMigrate()
 
+	router.Static("/assets", "./assets")
 	routes.Setup(router)
 
 	router.Run()

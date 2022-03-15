@@ -10,7 +10,7 @@
       integrity="sha384-Bfad6CLCknfcloXFOyFnlgtENryhrpZCe29RTifKEixXQZ38WheV+i/6YWSzkz3V"
       crossorigin="anonymous"
     />
-    <title>{{ .user.FirstName }}</title>
+    <title>{{ .FirstName }}</title>
 </head>
 <style>
 
@@ -24,7 +24,7 @@
     .image-background {
         width: 100%;
         height: 20vh;
-        background-image: url({{.user.BackgroundPic}});
+        background-image: url({{.BackgroundPic}});
         background-size:contain; 
         display: flex;
         align-items: center;
@@ -41,7 +41,7 @@
         background-color: black;
         border-radius: 50%;
         margin-top: 5%;
-        background-image: url({{.user.ProfilePic}});
+        background-image: url({{.ProfilePic}});
         background-position: center;
         background-size: cover;
         border: 1px solid white;
@@ -151,15 +151,6 @@
         background-color: rgb(106, 106, 106);
     }
 
-    .admin {
-        font-size: 0.7rem;
-        font-weight: normal;
-        background-color: gold;
-        padding: 5px;
-        border-radius: 10px;
-        color: black;
-    }
-
 </style>
 <body>
     <div class="image-background">
@@ -167,12 +158,10 @@
     </div>
     <section class="profile-content">
 
-        {{ if .user.IsAdmin }}
+        {{ if .IsAdmin }}
             <aside class="left-menu__admin--painel">
-                
 
-                <a href=""><i class="fa fa-lock" title="Admin Menu" aria-hidden="true"></i></a>
-                <a href="/u/{{ .user.FirstName }}/publish"><i class="fa fa-plus" title="New Post" aria-hidden="true"></i></a>
+                <a href=""><i class="fa fa-lock" aria-hidden="true"></i></a>
                 <a href=""><i class="fa fa-bars" aria-hidden="true"></i></a>
 
             </aside>
@@ -180,51 +169,12 @@
 
         <div class="box-info">
             <div class="no-wrap">
-                <h1 class="username"> {{ .user.FirstName }} {{ if .user.IsAdmin }} <span class="admin">Admin</span> {{ end }} </h1>
-                <p class="job"> {{ .user.Job }} </p>
+                <h1 class="username"> {{ .FirstName }} </h1>
+                <p class="job"> {{ .Job }} </p>
                 <p class="hr"> 人工水平線 </p>
             </div>
         </div>
 
-        <div class="posts--by__user">   
-            {{ if .isuserpage }}
-                {{ range .posts }}
-                    <div class="post--box">
-                        <div class="wrapp--title">
-                            <p>{{ .Title }}</p>
-                            <p class="hr"> 人工水平線 </p>
-                        </div>
-                        <div class="wrapper-box">
-                            {{ .Description }}
-                        </div>
-                        <div class="wrapp--crud">
-
-                            <a class="see-full" href="/post/{{.ID}}">看帖子 ----- </a>
-                            <a class="update" href="/u/{{.UserID}}/update/post/{{.ID}}">更新 ----- </a>
-
-                            <form action="/u/{{.UserID}}/delete/post/{{.ID}}" method="get">
-                                <input type="submit" class="delete" value="刪除">
-                            </form>
-                                                        
-                        </div>
-                    </div>
-                {{ end }}
-            {{ else }}
-                {{ range .posts }}
-                <div class="post--box">
-                    <div class="wrapp--title">
-                        <p>{{ .Title }}</p>
-                        <p class="hr"> 人工水平線 </p>
-                    </div>
-                    <div class="wrapper-box">
-                        {{ .Description }}
-                    </div>
-                    <div class="wrapp--crud">
-                        <a class="see-full" href="/post/{{.ID}}">看帖子 </a>                                     
-                    </div>
-                </div>
-                {{ end }}
-            {{end}}
 
         </div>
     </section>

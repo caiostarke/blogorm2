@@ -1,7 +1,6 @@
 package controllers
 
 import (
-	"log"
 	"net/http"
 	"strconv"
 
@@ -20,7 +19,7 @@ func GetPost(ctx *gin.Context) {
 	database.DB.Where("id = ?", id).First(&post)
 	if post.ID == 0 {
 		ctx.JSON(404, gin.H{
-			"message":"Post not found, are u sure did u put correct ID?",
+			"message": "Post not found, are u sure did u put correct ID?",
 		})
 		return
 	}
@@ -31,7 +30,7 @@ func GetPost(ctx *gin.Context) {
 	})
 }
 
-func LinkUserAndTag(post models.Post, tag models.Tag, user models.User) models.Post{
+func LinkUserAndTag(post models.Post, tag models.Tag, user models.User) models.Post {
 	user.ID = post.UserID
 	tag.ID = post.TagID
 
@@ -56,7 +55,7 @@ func DeletePost(ctx *gin.Context) {
 
 	if cookie != user.FirstName {
 		ctx.JSON(405, gin.H{
-			"message":"Not Allowed",
+			"message": "Not Allowed",
 		})
 		return
 	}
@@ -69,12 +68,12 @@ func DeletePost(ctx *gin.Context) {
 
 	if post.UserID != userIdInt {
 		ctx.JSON(405, gin.H{
-			"message":"Not Allowed",
+			"message": "Not Allowed",
 		})
 		return
 	} else {
 		database.DB.Delete(&post)
-		ctx.Redirect(301, "/u/" + user.FirstName)
+		ctx.Redirect(301, "/u/"+user.FirstName)
 	}
 }
 
@@ -92,7 +91,7 @@ func UpdatePostPage(ctx *gin.Context) {
 
 	if cookie != user.FirstName {
 		ctx.JSON(405, gin.H{
-			"message":"Not Allowed",
+			"message": "Not Allowed",
 		})
 		return
 	}
@@ -101,40 +100,41 @@ func UpdatePostPage(ctx *gin.Context) {
 	post := models.Post{}
 
 	database.DB.Where("id = ?", idInt).First(&post)
-	if post.ID == 0{
+	if post.ID == 0 {
 		ctx.JSON(405, gin.H{
-			"message":"Post not found",
+			"message": "Post not found",
 		})
 		return
 	}
 
 	if post.UserID != user.ID {
 		ctx.JSON(405, gin.H{
-			"message":"Not Allowed",
+			"message": "Not Allowed",
 		})
 		return
 	} else {
 		ctx.HTML(http.StatusOK, "updatepage.html", gin.H{
-			"post":post,
-			"title":     "Update Page",
-			"image":     "https://pbs.twimg.com/profile_images/1497164191798603803/yoLtCnFO_400x400.jpg",
-			"jobautor":  "Student to Infinity",
+			"post":     post,
+			"title":    "Update Page",
+			"image":    "https://pbs.twimg.com/profile_images/1497164191798603803/yoLtCnFO_400x400.jpg",
+			"jobautor": "Student to Infinity",
+			"user":     user,
 		})
 	}
-}	
+}
 
-func UpdatePost(ctx *gin.Context){
-	id, _:= strconv.Atoi(ctx.Param("id")) // Id Post
-	userid := ctx.Param("username")	// Id User
-	
+func UpdatePost(ctx *gin.Context) {
+	id, _ := strconv.Atoi(ctx.Param("id")) // Id Post
+	userid := ctx.Param("username")        // Id User
+
 	var user models.User
 	post := models.Post{}
 
 	database.DB.Where("id = ?", id).First(&post)
 
-	if post.ID == 0{
+	if post.ID == 0 {
 		ctx.JSON(405, gin.H{
-			"message":"Post not found",
+			"message": "Post not found",
 		})
 		return
 	}
@@ -147,22 +147,21 @@ func UpdatePost(ctx *gin.Context){
 
 	if cookie != user.FirstName {
 		ctx.JSON(405, gin.H{
-			"message":"Not Allowed",
+			"message": "Not Allowed",
 		})
 		return
 	}
 
 	if post.UserID != user.ID {
 		ctx.JSON(405, gin.H{
-			"message":"Not Allowed",
+			"message": "Not Allowed",
 		})
 		return
-	} 
+	}
 
 	ctx.ShouldBind(&post)
 	post.User.ID = post.UserID
 	post.Tag.ID = post.TagID
-	log.Println(post)
 	database.DB.Save(&post)
-	ctx.Redirect(301, "/u/" + user.FirstName)
+	ctx.Redirect(301, "/u/"+user.FirstName)
 }

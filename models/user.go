@@ -8,6 +8,6 @@ type User struct {
 	Job           string `json:"job"`
 	ProfilePic    string `json:"profile_pic"`
 	BackgroundPic string `json:"background_pic"`
+	IsAdmin       bool   `json:"is_admin"`
 	Password      []byte `json:"-"`
 }
-

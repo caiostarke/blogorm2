@@ -17,7 +17,7 @@ func Setup(router *gin.Engine) {
 	store := cookie.NewStore([]byte("secret"))
 	router.Use(sessions.Sessions("session", store))
 	router.POST("/login", controllers.LoginController)
-	
+
 	user := router.Group("/u")
 	user.Use(middlewares.IsLogged())
 	{
@@ -28,6 +28,12 @@ func Setup(router *gin.Engine) {
 		user.GET("/:username/update/post/:id", controllers.UpdatePostPage)
 		user.POST("/:username/update/post/:id", controllers.UpdatePost)
 	}
+
+	// admin := router.Group("/admin")
+	// admin.Use(middlewares.IsLogged())1w
+	// {
+	// 	admin.GET("/:username", controllers.AdminHandler)
+	// }
 
 	post := router.Group("/post")
 	{

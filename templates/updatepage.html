@@ -15,10 +15,17 @@
         font-family: 'Times New Roman', Times, serif;
     }
 
+    * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+        font-family: 'Times New Roman', Times, serif;
+    }
+
     .image-background {
         width: 100%;
         height: 100vh;
-        background: black no-repeat center center fixed;
+        background: url('https://dhojeinterior.com.br/wp-content/uploads/2020/03/computador-hacker.png');
         background-size: cover; 
         display: flex;
         align-items: center;
@@ -30,7 +37,9 @@
         width: 100%;
         max-width: 780px;
         height: 100vh;
-        background-color: white;
+        background-color: rgba(0,0, 0, 1);
+        display: flex;
+        flex-direction: column;
         padding: 20px 20px;
     }
 
@@ -40,12 +49,13 @@
         display: flex;
         align-items: center;
         padding: 0 8px;
+        color: white;
     }
 
     .box-image__autor {
         width: 50px;
         height: 100%;
-        background-image: url('{{ .image }}');
+        background-image: url('{{ .user.ProfilePic }}');
         background-size: cover; 
     }
 
@@ -56,8 +66,25 @@
         padding: 30px 10px;
     }
 
+    .box-info__autor h5 {
+        font-weight: normal;
+        font-size: 1.5rem;
+    }
+
+    .box-info__autor h6 {
+        font-size: 1rem;
+        font-weight: normal;
+    }
+
     .box-info h1 {
         font-size: 0.7rem;
+    }
+
+    .form {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        height: 100%;
     }
 
     .title {
@@ -65,12 +92,13 @@
         width: 100%;
         padding: 7px 8px;
         font-size: 1.6rem;
-        color: rgb(0,0,0);
+        color: white;
         margin: 8px 0;
         border: none;
         outline: none;
         font-weight: 500;
         text-transform: capitalize;
+        background-color: rgba(0, 0, 0, 0.9);
     }
 
     .desc {
@@ -78,16 +106,22 @@
         border: none;
         outline: none;
         padding: 7px 8px;
+        color: white;
+        background-color: rgba(0, 0, 0, 0.9);
         width: 100%;
     }
 
     .content {
         text-align: left;
         width: 100%;
-        padding: 7px 8px;
+        padding: 7px 8px;   
         font-size: 0.9rem;
         border: none;
         outline: none;
+        resize: none;
+        color: white;
+        background-color: rgba(0, 0, 0, 0.9);
+
     }
 
     button{
@@ -107,7 +141,6 @@
         text-align: center;
         margin-top: 5px;
     }
-
 </style>
 <body>
     <div class="image-background">
@@ -116,14 +149,14 @@
                 <div class="box-autor">
                     <div class="box-image__autor"></div>
                     <div class="box-info__autor">
-                        <h5>{{ .post.Title }}</h5>
-                        <h6>{{ .jobautor }}</h6>
+                        <h5>{{ .user.FirstName }}</h5>
+                        <h6>{{ .user.Job }}</h6>
                     </div>
                 </div>
 
                 <form action="/u/{{.post.UserID}}/update/post/{{.post.ID}}" method="POST">
-                    <input name="title" id="title" class="title" type="text" placeholder="{{.post.Title}}">
-                    <input name="description" id="description" class="desc" type="text" placeholder="{{.post.Description}}">
+                    <input name="title" id="title" class="title" type="text" placeholder="{{.post.Title}}" value="{{.post.Title}}">
+                    <input name="description" id="description" class="desc" type="text" placeholder="{{.post.Description}}" value="{{.post.Description}}">
         
                     <textarea name="content" id="content" class="content" rows="4" cols="50" placeholder="{{.post.Content}}"></textarea>
 
