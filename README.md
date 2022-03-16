@@ -8,7 +8,7 @@
 ### Ajustes e melhorias
 
 O projeto foi criado enquanto eu estudava SQL e tinha como objetivo inicial ser apenas um blog com operações simples,
-porém acabou virando um frankstein e eu vou adicionando novas coisas nele conforme eu vou as estudando. 
+porém acabou virando um frankenstein e eu vou adicionando novas coisas nele conforme eu vou as estudando. 
 
 - [ ] Criar um mecanismo de amizades.
 - [ ] Like nos posts.
