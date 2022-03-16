@@ -25,7 +25,7 @@ func GetPost(ctx *gin.Context) {
 	}
 	post = LinkUserAndTag(post, tag, user)
 
-	ctx.HTML(http.StatusOK, "singlepost.html", gin.H{
+	ctx.HTML(http.StatusOK, "singlepost.gotmpl", gin.H{
 		"post": post,
 	})
 }
@@ -113,7 +113,7 @@ func UpdatePostPage(ctx *gin.Context) {
 		})
 		return
 	} else {
-		ctx.HTML(http.StatusOK, "updatepage.html", gin.H{
+		ctx.HTML(http.StatusOK, "updatepage.gotmpl", gin.H{
 			"post":     post,
 			"title":    "Update Page",
 			"image":    "https://pbs.twimg.com/profile_images/1497164191798603803/yoLtCnFO_400x400.jpg",

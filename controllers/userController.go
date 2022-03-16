@@ -35,7 +35,7 @@ func UserPage(ctx *gin.Context) {
 
 	database.DB.Where("user_id = ?", user.ID).Find(&posts)
 
-	ctx.HTML(http.StatusOK, "userpage.html", gin.H{
+	ctx.HTML(http.StatusOK, "userpage.gotmpl", gin.H{
 		"user":       user,
 		"posts":      posts,
 		"isuserpage": userPage,
@@ -43,7 +43,7 @@ func UserPage(ctx *gin.Context) {
 }
 
 func RegisterGet(ctx *gin.Context) {
-	ctx.HTML(http.StatusOK, "register.html", nil)
+	ctx.HTML(http.StatusOK, "register.gotmpl", nil)
 }
 
 func RegisterPost(ctx *gin.Context) {
@@ -115,7 +115,7 @@ func UserPublishGet(ctx *gin.Context) {
 		userPage = true
 	}
 
-	ctx.HTML(http.StatusOK, "user.html", gin.H{
+	ctx.HTML(http.StatusOK, "user.gotmpl", gin.H{
 		"userpage": userPage,
 		"user":     user,
 	})
